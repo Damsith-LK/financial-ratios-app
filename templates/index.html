@@ -1,17 +1,53 @@
 {% include "header.html" %}
 <!--Use a bootstrap hero here. The hero content differs on user's logged-in status. Do these changes later.-->
-<section id="hero">
-<div class="container col-xxl-8 px-4 py-5">
-    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-      <div class="col-10 col-sm-8 col-lg-6">
-        <img src="../static/assets/icons/cash.svg" class="d-block mx-lg-auto img-fluid" width="500" height="300" loading="lazy">
+<section class="hero">
+  <div class="container col-xxl-8 px-4 py-5 mt-4">
+      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+          <img src="../static/assets/icons/cash.svg" class="d-block mx-lg-auto img-fluid" width="500" height="300" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Calculate financial ratios quickly and efficiently</h1>
+          <p class="lead">Want to choose the best investment? Financial Ratios provide information needed for you to make a excellent decision. Our website allows you to quickly calculate financial ratios.</p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+          </div>
+        </div>
       </div>
-      <div class="col-lg-6">
-        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Calculate financial ratios quickly and efficiently</h1>
-        <p class="lead">Want to choose the best investment? Financial Ratios provide information needed for you to make a excellent decision. Our website allows you to quickly calculate financial ratios</p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+  </div>
+</section>
+
+<!--Here a features set with appear if not logged in. Else it will show your past activities. Make these changes later-->
+<section class="content">
+  <div class="container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-2 border-bottom">Features</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div class="col d-flex align-items-start">
+        <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3 p-2">
+          <img src="../static/assets/icons/lightning.svg" alt="Lightning">
+        </div>
+        <div>
+          <h3 class="fs-2 text-body-emphasis">Fast</h3>
+          <p>You can calculate essential financial ratios quickly upon entering inputs and submitting. No ads. No unnecessary animations.</p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3 p-2">
+          <img src="../static/assets/icons/checkmark.svg" alt="Checkmark">
+        </div>
+        <div>
+          <h3 class="fs-2 text-body-emphasis">Accurate</h3>
+          <p>Our service provides a short description for each financial ratio. When you calculate ratios, you get the right information without faults.</p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3 p-2">
+          <img src="../static/assets/icons/history.svg" alt="History Clock">
+        </div>
+        <div>
+          <h3 class="fs-2 text-body-emphasis">History-saved</h3>
+          <p>Logged-in users can see their past calculations with essential details in the home page.</p>
         </div>
       </div>
     </div>
