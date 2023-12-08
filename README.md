@@ -1,4 +1,3 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
@@ -115,7 +114,7 @@ $ pip install -r requirements.txt
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Design the GUI
+- [x] Design the GUI
 - [ ] Make the home page work
 - [ ] Define financial ratios available
 - [ ] Let the user calculate financial ratios on respective pages
