@@ -1,0 +1,16 @@
+<!--This is a common template for all the ratio pages-->
+<!--Text in this template changes according to which ratio is being calculated-->
+
+{% include "header.html" %}
+
+<section>
+  <div class="container-xxl mt-5">
+    <div class="p-5 text-center bg-body-light rounded-3 mt-5">
+      <h1 class="text-body-light text-light hidden"></h1>
+      <h1 class="text-body-emphasis">{{ ratio_name }}</h1>
+      <p class="lead mt-3 mx-a">{{ ratio_description }}</p>
+    </div>
+  </div>
+</section>
+    
+{% include "footer.html" %}
