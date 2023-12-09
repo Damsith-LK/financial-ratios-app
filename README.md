@@ -87,24 +87,19 @@ This project was made entirely by me after completing a basic Flask course. Ulti
 
 
 
-<!-- GETTING STARTED -->
+<!-- INSTALLATION -->
 ## Getting Started
-
-### Prerequisites
-
-* Install with pip
-```
-$ pip install -r requirements.txt
-```
-
-### Installation
 
 1. Clone the repo
    ```sh
    git clone https://github.com/Damsith-LK/financial-ratios-app
    ```
-2. Replace environment variable fetching lines with actual information
-3. Run the code now
+2. Install with pip
+   ```
+   $ pip install -r requirements.txt
+   ```
+3. Replace environment-variable-fetching-lines with actual information
+4. Run the code now
    ```sh
    python main.py
    ```
