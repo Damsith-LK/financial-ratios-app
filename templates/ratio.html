@@ -1,6 +1,7 @@
 <!--This is a common template for all the ratio pages-->
 <!--Text in this template changes according to which ratio is being calculated-->
 
+{% from "bootstrap5/form.html" import render_form %}
 {% include "header.html" %}
 
 <!--Definition of the ratio-->
@@ -15,5 +16,42 @@
     </div>
   </div>
 </section>
+
+<!--Calculation of the ratio-->
+<section id="calculation">
+  <div class="container-xxl mt-3">
+    <form method="post" action="/ratio/{{ratio}}">
+      {{ form.hidden_tag() }}
+      <div class="row g-3">
+        <div class="form-group col">
+          <label for="{{ form.input_1.id }}" class="control-label mb-1">{{ labels[0] }}</label>
+          <div class="col-sm-10">
+            {{ form.input_1(class="form-control") }}
+          </div>
+        </div>
+        <div class="form-group col">
+          <label for="{{ form.input_2.id }}" class="control-label mb-1">{{ labels[1] }}</label>
+          <div class="col-sm-10">
+            {{ form.input_2(class="form-control") }}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            {{ form.submit(class="btn btn-primary") }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!--Display calculation result. Only shows if it's an POST request-->
+{% if is_post %}
+<section id="output">
+  <div class="container-xxl my-3">
+    {{ ratio_name }} is {{ result }}
+  </div>
+</section>
+{% endif %}
     
 {% include "footer.html" %}
