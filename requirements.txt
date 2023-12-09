@@ -1,1 +1,4 @@
 Flask~=2.2.5
+Bootstrap-Flask==2.2.0
+WTForms==3.0.1
+Flask-WTF==1.1.1
