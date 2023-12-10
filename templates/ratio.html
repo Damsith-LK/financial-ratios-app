@@ -45,11 +45,26 @@
   </div>
 </section>
 
-<!--Display calculation result. Only shows if it's an POST request-->
+<!--Display calculation result. Only shows if it's an POST request. Going to use a modal to display the output-->
 {% if is_post %}
 <section id="output">
-  <div class="container-xxl my-3">
-    {{ ratio_name }} is {{ result }}
+  <div class="modal modal-sheet position-static d-block bg-body-light p-4 py-md-5" tabindex="-1" role="dialog" id="modalSheet">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header border-bottom-0">
+          <h1 class="modal-title-centered fs-5">Calculation Completed</h1>
+          <!--I can't find a way to actually close the modal upon clicking the button-->
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-0">
+          <p>{{ ratio_name }} is {{ result }}</p>
+        </div>
+        <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
+          <!--For now it's just a button. Later, I need to add the save feature-->
+          <button type="button" class="btn btn-lg btn-primary">Save to history</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 {% endif %}
