@@ -9,3 +9,6 @@ def net_operating_margin_percentage(EBIT: float or int, sales: float or int):
 
 def operating_leverage(contribution: float or int, fixed_costs: float or int):
     return f"{round(contribution / fixed_costs, 2)}"
+
+def financial_leverage(total_capital_employed: float or int, shareholder_equity: float or int):
+    return f"{round(total_capital_employed / shareholder_equity, 2)}"

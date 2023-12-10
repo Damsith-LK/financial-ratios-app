@@ -35,5 +35,16 @@ ratios_dict = {
                            "is no return for the owners. The higher the operating leverage, the better.",
             "labels": ["Contributions", "Fixed costs"],
             "function": functions.operating_leverage
+        },
+    "financial-leverage":
+        {
+            "name": "Financial leverage",
+            "description": "Financial leverage refers to the degree to which an investor or a business uses borrowed money. "
+                           "Total capital employed is the book or accounting value of all interest-bearing debt(leave out "
+                           "payables for goods to be resold and liabilities due to wages, expenses, and taxes owed but not "
+                           "yet paid), plus all owners equity. So if you have $50,000 of debt and $50,000 of shareholder's "
+                           "equity, your financial leverage would be 2(or $100,000 divided by $50,000).",
+            "labels": ["Total capital employed", "Shareholders' equity"],
+            "function": functions.financial_leverage
         }
 }
