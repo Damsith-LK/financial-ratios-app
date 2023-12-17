@@ -83,5 +83,37 @@ ratios_dict = {
                        "assets on its balance sheet to satisfy its current debt and other payables.",
         "labels": ["Current assets", "Current liabilities"],
         "function": functions.current_ratio
-        }
+        },
+    "pe-ratio": {
+        "name": "P/E Ratio",
+        "description": "The price-to-earnings ratio is the ratio for valuing a company that measures its current share "
+                       "price relative to its earnings per share (EPS). The price-to-earnings ratio is also sometimes "
+                       "known as the price multiple or the earnings multiple."
+                       "P/E ratios are used by investors and analysts to determine the relative value of a company's "
+                       "shares in an apples-to-apples comparison to others in the same sector. It can also be used to "
+                       "compare a company against its own historical record or to compare aggregate markets against one "
+                       "another or over time.",
+        "labels": ["Market price (per share)", "Net income (per share)"],
+        "function": functions.pe_ratio
+        },
+    "return-on-equity": {
+        "name": "Return on equity",
+        "description": "Return on equity (ROE) is a measure of financial performance calculated by dividing net income "
+                       "by shareholders' equity. Because shareholders' equity is equal to a company’s assets minus its "
+                       "debt, ROE is considered the return on net assets. ROE is considered a gauge of a corporation's "
+                       "profitability and how efficient it is in generating profits. The higher the ROE, the more "
+                       "efficient a company's management is at generating income and growth from its equity financing",
+        "labels": ["Net income", " Shareholders' equity"],
+        "function": functions.return_on_equity
+        },
+    "cash-on-cash-return": {
+        "name": "Cash-on-cash return",
+        "description": "A cash-on-cash return is a rate of return often used in real estate transactions that calculates "
+                       "the cash income earned on the cash invested in a property. Let's say you bought an apartment "
+                       "building for $500,000. You put $100,000 down and secure a mortgage for the $400,000 balance. "
+                       "You have a monthly cash flow of $2,000 after all expenses and the mortgage payment. Your cash-on-cash "
+                       "return is 24 percent or $24,000 ($2,000 x 12 months) divided by $100,000.",
+        "labels": ["Positive net cash flow", "Down payment"],
+        "function": functions.cash_on_cash_return
+    }
 }

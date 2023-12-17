@@ -24,3 +24,12 @@ def quick_ratio(liquid_assets: float or int, current_liabilities: float or int):
 
 def current_ratio(current_assets: float or int, current_liabilities: float or int):
     return f"{round(current_assets / current_liabilities, 2)}"
+
+def pe_ratio(market_price: float or int, net_income: float or int):
+    return f"{round(market_price / net_income, 2)}"
+
+def return_on_equity(net_income: float or int, shareholder_equity: float or int):
+    return f"{round(net_income / shareholder_equity)}"
+
+def cash_on_cash_return(positive_net_cash_return: float or int, down_payment: float or int):
+    return f"{round((positive_net_cash_return / down_payment) * 100, 1)}%"
