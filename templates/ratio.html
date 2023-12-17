@@ -11,7 +11,11 @@
       <h1 class="text-body-light text-light hidden"></h1>
       <h1 class="text-body-emphasis">{{ ratio_name }}</h1>
       <!--The equation is below-->
+      {% if ratio_name == "P/E Ratio" %}
+      <img src="../static/assets/images/pe ratio.png" class="mt-4 border border-primary">
+      {% else %}
       <img src="../static/assets/images/{{ratio_name}}.png" class="mt-4 border border-primary">
+      {% endif %}
       <p class="lead mt-4">{{ ratio_description }}</p>
     </div>
   </div>
