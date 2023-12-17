@@ -46,5 +46,26 @@ ratios_dict = {
                            "equity, your financial leverage would be 2(or $100,000 divided by $50,000).",
             "labels": ["Total capital employed", "Shareholders' equity"],
             "function": functions.financial_leverage
+        },
+    "total-leverage":
+        {
+            "name": "Total leverage",
+            "description": "Total leverage is the risk that a company carries in its present business. Total leverage tells "
+                           "you the total effect a given change in the business should have on the equity owners. If you "
+                           "are the business owner, and therefore on the inside, your company's total leverage is at least "
+                           "partly under your control. Well-run, conservatively managed (publicly traded) American companies "
+                           "usually keep the total-leverage figure under 5.",
+            "labels": ["Operating leverage", "Financial leverage"],
+            "function": functions.total_leverage
+        },
+    "debt-to-equity-ratio":
+        {
+            "name": "Debt-to-equity ratio",
+            "description": "Debt-to-equity ratio measures just that, the portion of the whole enterprise (total liabilities) "
+                           "financed by outsiders in the proportion to the part financed by insiders (total equity). "
+                           "Most businesses try to stay at a ratio of one-to-one or below. Generally speaking, the lower "
+                           "the debt-to-equity ratio, the more conservative the financial structure of the company.",
+            "labels": ["Total liabilities", "Total equity"],
+            "function": functions.debt_to_equity_ratio
         }
 }
