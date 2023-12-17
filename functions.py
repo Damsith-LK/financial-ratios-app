@@ -16,5 +16,11 @@ def financial_leverage(total_capital_employed: float or int, shareholder_equity:
 def total_leverage(operating_leverage: float or int, financial_leverage: float or int):
     return f"{round(operating_leverage * financial_leverage, 2)}"
 
-def debt_to_equity_ratio(total_liabilites: float or int, total_equity: float or int):
-    return f"{round(total_liabilites / total_equity, 2)}"
+def debt_to_equity_ratio(total_liabilities: float or int, total_equity: float or int):
+    return f"{round(total_liabilities / total_equity, 2)}"
+
+def quick_ratio(liquid_assets: float or int, current_liabilities: float or int):
+    return f"{round(liquid_assets / current_liabilities, 2)}"
+
+def current_ratio(current_assets: float or int, current_liabilities: float or int):
+    return f"{round(current_assets / current_liabilities, 2)}"

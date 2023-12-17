@@ -67,5 +67,21 @@ ratios_dict = {
                            "the debt-to-equity ratio, the more conservative the financial structure of the company.",
             "labels": ["Total liabilities", "Total equity"],
             "function": functions.debt_to_equity_ratio
+        },
+    "quick-ratio": {
+        "name": "Quick ratio",
+        "description": "In finance, the quick ratio, also known as the acid-test ratio is a type of liquidity ratio, "
+                       "which measures the ability of a company to use its near-cash or 'quick' assets to extinguish or "
+                       "retire its current liabilities immediately.",
+        "labels": ["Liquid assets", "Current liabilities"],
+        "function": functions.quick_ratio
+        },
+    "current-ratio": {
+        "name": "Current ratio",
+        "description": "The current ratio is a liquidity ratio that measures a company’s ability to pay short-term obligations "
+                       "or those due within one year. It tells investors and analysts how a company can maximize the current "
+                       "assets on its balance sheet to satisfy its current debt and other payables.",
+        "labels": ["Current assets", "Current liabilities"],
+        "function": functions.current_ratio
         }
 }
