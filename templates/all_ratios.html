@@ -1,0 +1,28 @@
+{% include 'header.html' %}
+
+<div class="container mt-5">
+	<div class="p-5 text-center bg-body-light rounded-3 mt-5">
+		<h1 class="text-body-light text-light hidden"></h1>
+		<h1 class="text-body-emphasis">All Ratios</h1>
+	</div>
+</div>
+
+<div class="d-flex justify-content-center container">
+	<ol class="list-group list-group-numbered">
+		{% for key, val in ratios_dict.items() %}
+		<li class="list-group-item d-flex justify-content-between align-items-start">
+			<div class="ms-2 me-auto">
+				<div class="fw-bold">{{ val['name'] }}</div>
+				{{ " ".join(val['description'].split()[:20]) }}
+				<b>...</b>
+			</div>
+			<a href="/ratio/{{ key }}" class="btn btn-light rounded-pill">
+				<span class="badge rounded-pill">
+					<img src="../static/assets/icons/right-arrow.svg">
+				</span>
+			</a>
+		</li>
+		{% endfor %}
+	</ol>
+</div>
+<a>
