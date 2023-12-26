@@ -37,5 +37,10 @@ def ratio(ratio):
 
     return render_template("ratio.html", ratio=ratio, ratio_name=name, ratio_description=description, form=form, labels=labels, year=year, is_post=is_post, result=result)
 
+@app.route("/all-ratios")
+def all_ratios():
+    return render_template("all_ratios.html", ratios_dict=ratios_dict)
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5002)
