@@ -1,28 +1,36 @@
 {% include 'header.html' %}
 
-<div class="container mt-5">
-	<div class="p-5 text-center bg-body-light rounded-3 mt-5">
-		<h1 class="text-body-light text-light hidden"></h1>
-		<h1 class="text-body-emphasis">All Ratios</h1>
-	</div>
-</div>
-
-<div class="d-flex justify-content-center container">
-	<ol class="list-group list-group-numbered">
-		{% for key, val in ratios_dict.items() %}
-		<li class="list-group-item d-flex justify-content-between align-items-start">
-			<div class="ms-2 me-auto">
-				<div class="fw-bold">{{ val['name'] }}</div>
-				{{ " ".join(val['description'].split()[:20]) }}
-				<b>...</b>
+<section class="hero">
+	<div class="container col-xxl-8 px-4 pt-5 mt-4">
+		<div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+			<div class="col-10 col-sm-8 col-lg-6">
+				<img src="../static/assets/icons/list.svg" alt="List" class="d-block mx-lg-auto img-fluid" width="400" height="300" loading="lazy">
 			</div>
-			<a href="/ratio/{{ key }}" class="btn btn-light rounded-pill">
-				<span class="badge rounded-pill">
-					<img src="../static/assets/icons/right-arrow.svg">
-				</span>
-			</a>
-		</li>
-		{% endfor %}
-	</ol>
-</div>
-<a>
+			<div class="col-lg-6">
+				<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Financial Ratios</h1>
+				<p class="lead">Here's a list of all the financial ratios available in our website. Click <b>arrow buttons</b> to learn more and calculate each ratio.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="ratios-list">
+	<div class="d-flex justify-content-center container mt-5">
+		<ol class="list-group list-group-numbered">
+			{% for key, val in ratios_dict.items() %}
+			<li class="list-group-item d-flex justify-content-between align-items-start">
+				<div class="ms-2 me-auto">
+					<div class="fw-bold">{{ val['name'] }}</div>
+					{{ " ".join(val['description'].split()[:20]) }}
+					<b>...</b>
+				</div>
+				<a href="/ratio/{{ key }}" class="btn btn-light rounded-pill">
+					<span class="badge rounded-pill">
+						<img src="../static/assets/icons/right-arrow.svg">
+					</span>
+				</a>
+			</li>
+			{% endfor %}
+		</ol>
+	</div>
+</section>
