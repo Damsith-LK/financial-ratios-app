@@ -3,12 +3,30 @@ from flask_bootstrap import Bootstrap5
 import datetime
 from ratios import ratios_dict
 from forms import FinancialRatiosForm
+from flask_sqlalchemy import SQLAlchemy
 import os
 
 app = Flask(__name__)
 Bootstrap5(app)
 # Initialize a secret key here
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+
+# CONNECT TO DB
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI")
+db = SQLAlchemy()
+db.init_app(app)
+
+# CONFIGURE TABLES
+class Users(db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False, unique=True)
+    password = db.Column(db.String, nullable=False)
+
+with app.app_context():
+    db.create_all()
+
 
 year = datetime.datetime.now().year
 
@@ -40,6 +58,10 @@ def ratio(ratio):
 @app.route("/all-ratios")
 def all_ratios():
     return render_template("all_ratios.html", ratios_dict=ratios_dict)
+
+@app.route("/signup")
+def signup():
+    pass
 
 
 if __name__ == "__main__":
