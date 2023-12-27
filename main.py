@@ -4,6 +4,7 @@ import datetime
 from ratios import ratios_dict
 from forms import FinancialRatiosForm
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 import os
 
 app = Flask(__name__)
@@ -15,6 +16,15 @@ app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI")
 db = SQLAlchemy()
 db.init_app(app)
+
+# CONFIGURE FLASK-LOGIN
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.get_or_404(Users, user_id)
+
 
 # CONFIGURE TABLES
 class Users(db.Model):
