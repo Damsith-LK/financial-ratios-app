@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 import datetime
 from ratios import ratios_dict
-from forms import FinancialRatiosForm
+from forms import FinancialRatiosForm, SignupForm
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import os
@@ -40,7 +40,7 @@ with app.app_context():
 
 year = datetime.datetime.now().year
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
     return render_template("index.html", year=year)
 
@@ -71,7 +71,8 @@ def all_ratios():
 
 @app.route("/signup")
 def signup():
-    pass
+    form = SignupForm()
+    return render_template("signup.html", year=year, form=form)
 
 
 if __name__ == "__main__":
