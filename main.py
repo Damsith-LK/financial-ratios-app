@@ -79,6 +79,12 @@ def signup():
         name = form.name.data
         email = form.email.data.lower()
         password = form.password.data
+        # Check if the email already exists in the DB
+        check_email = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
+        if check_email:
+            flash("You've already signed up with that email. Log in instead.")
+            return redirect(url_for("login"))
+        ## If the email doesn't exist in DB, following code will be executed and a new user account will be created
         # Hash the password
         hashed_password = generate_password_hash(password=password, salt_length=SALT_LENGTH)
         # Create a new user
