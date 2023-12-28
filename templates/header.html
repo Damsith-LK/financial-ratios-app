@@ -32,6 +32,19 @@
           <li class="nav-item">
             <a class="nav-link px-lg-3 py-3 py-lg-4 text-light" href="{{ url_for('home') }}">Home</a>
           </li>
+          <!--Navigation bar changes according to the sign-in status-->
+          {% if is_logged_in %}
+          <li class="nav-item">
+            <a class="nav-link px-lg-3 py-3 py-lg-4 text-light" href="{{url_for('logout')}}">Log Out</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link px-lg-3 py-3 py-lg-4 text-light" href="{{url_for('signup')}}">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-lg-3 py-3 py-lg-4 text-light" href="{{url_for('login')}}">Log In</a>
+          </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link px-lg-3 py-3 py-lg-4 text-light" href="#">About</a>
           </li>

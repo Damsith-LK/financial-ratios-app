@@ -1,0 +1,28 @@
+{% include 'header.html' %}
+
+<!--Using a centered modal-->
+<div class="modal modal-sheet d-block  p-4 py-md-5 mt-5" tabindex="-1" role="dialog" id="modalSignin">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content rounded-4 shadow">
+			<div class="modal-header p-5 pb-4 border-bottom-0">
+				<h1 class="fw-bold mb-0 fs-2">Log in to your account</h1>
+			</div>
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			<div class="mx-5 mb-3">
+				<small class="text-danger">{{ messages[0] }}</small>
+			</div>
+			{% endif %}
+			{% endwith %}
+			<div class="modal-body p-5 pt-0">
+				<form method="POST" action="/login"> {{ form.hidden_tag() }}
+					{{ form.email.label }} {{ form.email(size=32, class="form-control rounded-3") }}
+					{{ form.password.label }} {{ form.password(size=32, class="form-control rounded-3") }}
+					{{ form.submit(class="w-100 mt-4 mb-3 btn btn-lg rounded-3 btn-primary") }}
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% include 'footer.html' %}
