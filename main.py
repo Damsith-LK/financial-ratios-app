@@ -1,12 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from flask_bootstrap import Bootstrap5
 import datetime
 from ratios import ratios_dict
 from forms import FinancialRatiosForm, SignupForm
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+from flask_login import LoginManager, login_user, current_user, UserMixin
+from werkzeug.security import check_password_hash, generate_password_hash
 import os
 
+SALT_LENGTH = 8
 app = Flask(__name__)
 Bootstrap5(app)
 # Initialize a secret key here
@@ -27,7 +29,7 @@ def load_user(user_id):
 
 
 # CONFIGURE TABLES
-class Users(db.Model):
+class Users(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
@@ -40,7 +42,7 @@ with app.app_context():
 
 year = datetime.datetime.now().year
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def home():
     return render_template("index.html", year=year)
 
@@ -69,9 +71,24 @@ def ratio(ratio):
 def all_ratios():
     return render_template("all_ratios.html", ratios_dict=ratios_dict)
 
-@app.route("/signup")
+@app.route("/signup", methods=["GET", "POST"])
 def signup():
     form = SignupForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        email = form.email.data.lower()
+        password = form.password.data
+        # Hash the password
+        hashed_password = generate_password_hash(password=password, salt_length=SALT_LENGTH)
+        # Create a new user
+        new_user = Users(name=name, email=email, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+        # Authenticate the user with flask-login
+        login_user(new_user)
+        print(current_user)
+        return redirect("/")
+
     return render_template("signup.html", year=year, form=form)
 
 
