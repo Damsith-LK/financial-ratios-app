@@ -107,9 +107,16 @@ def login():
         password = form.password.data
         # Search for email in the DB
         search_email = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
-        if search_email:
-            if check_password_hash(search_email.password, password):
-                login_user(search_email)
+        # If email doesn't exist in DB
+        if not search_email:
+            flash("Sorry, that email doesn't exist. You'll have to sign up with it.")
+            return redirect(url_for("signup"))
+        # If password is incorrect
+        elif not check_password_hash(search_email.password, password):
+            flash("The password you entered is incorrect.")
+            return redirect(url_for("login"))
+        ## If everything is alright, following code will be executed and the user will be logged in
+        login_user(search_email, remember=True)
         return redirect("/")
 
     return render_template("login.html", form=form, year=year, is_logged_in=current_user.is_authenticated)
