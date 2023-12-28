@@ -1,10 +1,10 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, flash
 from flask_bootstrap import Bootstrap5
 import datetime
 from ratios import ratios_dict
 from forms import FinancialRatiosForm, SignupForm
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_user, current_user, UserMixin
+from flask_login import LoginManager, login_user, current_user, UserMixin, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
 
@@ -44,7 +44,7 @@ year = datetime.datetime.now().year
 
 @app.route("/")
 def home():
-    return render_template("index.html", year=year)
+    return render_template("index.html", year=year, is_logged_in=current_user.is_authenticated)
 
 @app.route("/ratio/<string:ratio>", methods=["GET", "POST"])
 def ratio(ratio):
@@ -65,11 +65,11 @@ def ratio(ratio):
             result = ratios_dict[ratio]["function"](input_1, input_2)
             is_post = True
 
-    return render_template("ratio.html", ratio=ratio, ratio_name=name, ratio_description=description, form=form, labels=labels, year=year, is_post=is_post, result=result)
+    return render_template("ratio.html", ratio=ratio, ratio_name=name, ratio_description=description, form=form, labels=labels, year=year, is_post=is_post, result=result, is_logged_in=current_user.is_authenticated)
 
 @app.route("/all-ratios")
 def all_ratios():
-    return render_template("all_ratios.html", ratios_dict=ratios_dict)
+    return render_template("all_ratios.html", ratios_dict=ratios_dict, is_logged_in=current_user.is_authenticated)
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -86,10 +86,9 @@ def signup():
         db.session.commit()
         # Authenticate the user with flask-login
         login_user(new_user)
-        print(current_user)
         return redirect("/")
 
-    return render_template("signup.html", year=year, form=form)
+    return render_template("signup.html", year=year, form=form, is_logged_in=current_user.is_authenticated)
 
 
 if __name__ == "__main__":
