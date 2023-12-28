@@ -9,7 +9,7 @@
 			</div>
 
 			<div class="modal-body p-5 pt-0">
-				<form method="POST" action="/signup"> {{ form.hidden_tag() }}
+				<form method="POST" action="/login"> {{ form.hidden_tag() }}
 					{{ form.email.label }} {{ form.email(size=32, class="form-control rounded-3") }}
 					{{ form.password.label }} {{ form.password(size=32, class="form-control rounded-3") }}
 					{{ form.submit(class="w-100 mt-4 mb-3 btn btn-lg rounded-3 btn-primary") }}

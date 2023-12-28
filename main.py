@@ -73,6 +73,7 @@ def all_ratios():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
+    """Create a new user account"""
     form = SignupForm()
     if form.validate_on_submit():
         name = form.name.data
@@ -93,7 +94,17 @@ def signup():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """Log in to an existing user account"""
     form = LoginForm()
+    if form.validate_on_submit():
+        email = form.email.data.lower()
+        password = form.password.data
+        # Search for email in the DB
+        search_email = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
+        if search_email:
+            if check_password_hash(search_email.password, password):
+                login_user(search_email)
+        return redirect("/")
 
     return render_template("login.html", form=form, year=year, is_logged_in=current_user.is_authenticated)
 
