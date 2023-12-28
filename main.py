@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, flash
 from flask_bootstrap import Bootstrap5
 import datetime
 from ratios import ratios_dict
-from forms import FinancialRatiosForm, SignupForm
+from forms import FinancialRatiosForm, SignupForm, LoginForm
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, current_user, UserMixin, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -90,6 +90,12 @@ def signup():
 
     return render_template("signup.html", year=year, form=form, is_logged_in=current_user.is_authenticated)
 
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+
+    return render_template("login.html", form=form, year=year, is_logged_in=current_user.is_authenticated)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5002)
