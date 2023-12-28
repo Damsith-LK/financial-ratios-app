@@ -82,7 +82,7 @@ def signup():
         # Check if the email already exists in the DB
         check_email = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
         if check_email:
-            flash("You've already signed up with that email. Log in instead.")
+            flash("You've already signed up with that email. Log in instead.", category="error")
             return redirect(url_for("login"))
         ## If the email doesn't exist in DB, following code will be executed and a new user account will be created
         # Hash the password
@@ -109,7 +109,7 @@ def login():
         search_email = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
         # If email doesn't exist in DB
         if not search_email:
-            flash("Sorry, that email doesn't exist. You'll have to sign up with it.")
+            flash("Sorry, that email doesn't exist. You'll have to sign up with it.", category="error")
             return redirect(url_for("signup"))
         # If password is incorrect
         elif not check_password_hash(search_email.password, password):

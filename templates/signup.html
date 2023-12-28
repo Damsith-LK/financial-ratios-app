@@ -7,7 +7,13 @@
 			<div class="modal-header p-5 pb-4 border-bottom-0">
 				<h1 class="fw-bold mb-0 fs-2">Sign up for free</h1>
 			</div>
-
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			<div class="mx-5 mb-3">
+				<small class="text-danger">{{ messages[0] }}</small>
+			</div>
+			{% endif %}
+			{% endwith %}
 			<div class="modal-body p-5 pt-0">
 				<form method="POST" action="/signup"> {{ form.hidden_tag() }}
 					{{ form.name.label}} {{ form.name(size=32, class="form-control rounded-3")}}
