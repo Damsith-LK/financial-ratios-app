@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, flash
+from flask import Flask, render_template, redirect, flash, url_for
 from flask_bootstrap import Bootstrap5
 import datetime
 from ratios import ratios_dict
@@ -107,6 +107,14 @@ def login():
         return redirect("/")
 
     return render_template("login.html", form=form, year=year, is_logged_in=current_user.is_authenticated)
+
+
+@app.route("/logout")
+def logout():
+    """Logs out an existing user"""
+    if current_user.is_authenticated:
+        logout_user()
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(debug=True, port=5002)
