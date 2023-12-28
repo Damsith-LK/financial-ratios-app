@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, flash, url_for
 from flask_bootstrap import Bootstrap5
 import datetime
 from ratios import ratios_dict
-from forms import FinancialRatiosForm, SignupForm, LoginForm
+from forms import FinancialRatiosForm, SignupForm, LoginForm, SaveToHistory
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, current_user, UserMixin, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -51,6 +51,7 @@ def ratio(ratio):
     is_post = False
     result = None
     form = FinancialRatiosForm()
+    form_2 = None
     # In order to check if the ratio in url actually exists:
     if ratio in ratios_dict:
         name = ratios_dict[ratio]["name"]
@@ -64,8 +65,12 @@ def ratio(ratio):
             # Calling the function stored inside dict
             result = ratios_dict[ratio]["function"](input_1, input_2)
             is_post = True
+            # The form for saving the calculation to history
+            form_2 = SaveToHistory()
+            if form_2.validate_on_submit():
+                print("Save to history")
 
-    return render_template("ratio.html", ratio=ratio, ratio_name=name, ratio_description=description, form=form, labels=labels, year=year, is_post=is_post, result=result, is_logged_in=current_user.is_authenticated)
+    return render_template("ratio.html", ratio=ratio, ratio_name=name, ratio_description=description, form=form, form_2=form_2, labels=labels, year=year, is_post=is_post, result=result, is_logged_in=current_user.is_authenticated)
 
 @app.route("/all-ratios")
 def all_ratios():

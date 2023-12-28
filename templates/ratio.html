@@ -56,20 +56,24 @@
       <div class="modal-content rounded-4 shadow">
         <div class="modal-header border-bottom-0">
           <h1 class="modal-title-centered fs-5">Calculation Completed</h1>
-          <!--I can't find a way to actually close the modal upon clicking the button-->
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body py-0">
           <p>{{ ratio_name }} is {{ result }}</p>
         </div>
+        <!--Only logged-in users can see "Save to history" button-->
+        {% if is_logged_in %}
+        <form method="POST"></form>
+        {{ form_2.hidden_tag() }}
         <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
-          <!--For now it's just a button. Later, I need to add the save feature-->
-          <button type="button" class="btn btn-lg btn-primary">Save to history</button>
+          <!--Logged-in users can save their calculation by clicking the button below-->
+          {{ form_2.submit(class='btn btn-lg btn-primary') }}
         </div>
+        </form>
+        {% endif %}
       </div>
     </div>
   </div>
 </section>
 {% endif %}
-    
+
 {% include "footer.html" %}
