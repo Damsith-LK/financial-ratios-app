@@ -6,6 +6,7 @@ from forms import FinancialRatiosForm, SignupForm, LoginForm, SaveToHistory
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, current_user, UserMixin, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
+from sqlalchemy.orm import relationship
 import os
 
 SALT_LENGTH = 8
@@ -27,14 +28,35 @@ login_manager.init_app(app)
 def load_user(user_id):
     return db.get_or_404(Users, user_id)
 
+def save_to_history():
+    """Function for saving calculations in a DB as history"""
+
 
 # CONFIGURE TABLES
+# Have to use one-to-many relationship between Users and Calculations. One user can have many saved calculations.
 class Users(UserMixin, db.Model):
+    """Parent table containing data about users of the website"""
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
+    calculations = relationship("Calculations", back_populates="user")
+
+class Calculations(db.Model):
+    """Child table containing calculations done by users and relevant information"""
+    __tablename__ = "calculations"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    user = relationship("Users", back_populates="calculations")
+    result = db.Column(db.Float, nullable=False)
+    input_1_name = db.Column(db.String, nullable=False)
+    input_1_val = db.Column(db.Float, nullable=False)
+    input_2_name = db.Column(db.String, nullable=False)
+    input_2_val = db.Column(db.Float, nullable=False)
+    notes = db.Column(db.String, nullable=True)
+    date = db.Column(db.String, nullable=False)
+
 
 with app.app_context():
     db.create_all()
