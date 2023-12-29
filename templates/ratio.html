@@ -58,14 +58,15 @@
           <h1 class="modal-title-centered fs-5">Calculation Completed</h1>
         </div>
         <div class="modal-body py-0">
-          <p>{{ ratio_name }} is {{ result }}</p>
+          <p>{{ ratio_name }} is <b>{{ result }}</b></p>
         </div>
         <!--Only logged-in users can see "Save to history" button-->
         {% if is_logged_in %}
         <form method="POST"></form>
         {{ form_2.hidden_tag() }}
         <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
-          <!--Logged-in users can save their calculation by clicking the button below-->
+          <!--Logged-in users can save their calculation by clicking the submit below. They can also leave a note for later convenience-->
+          {{ form_2.note.label }} {{ form_2.note(class='form-control rounded-3') }}
           {{ form_2.submit(class='btn btn-lg btn-primary') }}
         </div>
         </form>

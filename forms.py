@@ -21,4 +21,5 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Let me in!")
 
 class SaveToHistory(FlaskForm):
+    note = StringField("Notes (Optional)")
     submit = SubmitField("Save to history")
