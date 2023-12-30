@@ -28,10 +28,6 @@ login_manager.init_app(app)
 def load_user(user_id):
     return db.get_or_404(Users, user_id)
 
-def save_to_history():
-    """Function for saving calculations in a DB as history"""
-
-
 # CONFIGURE TABLES
 # Have to use one-to-many relationship between Users and Calculations. One user can have many saved calculations.
 class Users(UserMixin, db.Model):
@@ -49,7 +45,7 @@ class Calculations(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     user = relationship("Users", back_populates="calculations")
-    result = db.Column(db.Float, nullable=False)
+    result = db.Column(db.String, nullable=False)
     input_1_name = db.Column(db.String, nullable=False)
     input_1_val = db.Column(db.Float, nullable=False)
     input_2_name = db.Column(db.String, nullable=False)
@@ -90,7 +86,12 @@ def ratio(ratio):
             # The form for saving the calculation to history
             form_2 = SaveToHistory()
             if form_2.validate_on_submit():
-                print("Save to history")
+                date = datetime.datetime.now().strftime("%d, %b %Y")
+                notes = form_2.note.data
+                # Creating new record in DB
+                new_calculation = Calculations(user=current_user, result=result, input_1_name=labels[0], input_1_val=input_1, input_2_name=labels[1], input_2_val=input_2, notes=notes, date=date)
+                db.session.add(new_calculation)
+                db.session.commit()
 
     return render_template("ratio.html", ratio=ratio, ratio_name=name, ratio_description=description, form=form, form_2=form_2, labels=labels, year=year, is_post=is_post, result=result, is_logged_in=current_user.is_authenticated)
 
