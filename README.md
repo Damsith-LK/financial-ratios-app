@@ -115,7 +115,7 @@ This project was made entirely by me after completing a basic Flask course. Ulti
 - [x] Let the user calculate financial ratios on respective pages
 - [x] Complete the sign-in process
 - [x] Change the website appearance according to sign-in status
-- [ ] Let the users save their calculations
+- [x] Let the users save their calculations
 - [ ] Create a page for past calculations
 
 
