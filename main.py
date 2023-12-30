@@ -45,6 +45,7 @@ class Calculations(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     user = relationship("Users", back_populates="calculations")
+    calculation_name = db.Column(db.String, nullable=False)
     result = db.Column(db.String, nullable=False)
     input_1_name = db.Column(db.String, nullable=False)
     input_1_val = db.Column(db.Float, nullable=False)
@@ -89,7 +90,7 @@ def ratio(ratio):
                 date = datetime.datetime.now().strftime("%d, %b %Y")
                 notes = form_2.note.data
                 # Creating new record in DB
-                new_calculation = Calculations(user=current_user, result=result, input_1_name=labels[0], input_1_val=input_1, input_2_name=labels[1], input_2_val=input_2, notes=notes, date=date)
+                new_calculation = Calculations(user=current_user, calculation_name=name, result=result, input_1_name=labels[0], input_1_val=input_1, input_2_name=labels[1], input_2_val=input_2, notes=notes, date=date)
                 db.session.add(new_calculation)
                 db.session.commit()
 
