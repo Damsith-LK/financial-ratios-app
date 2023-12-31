@@ -129,5 +129,11 @@ def logout():
         logout_user()
     return redirect("/")
 
+@app.errorhandler(404)
+def page_not_found(e):
+    """Customized 404 error page"""
+    return render_template("404.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5002)
