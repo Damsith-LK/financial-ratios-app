@@ -123,19 +123,20 @@ def login():
 
 
 @app.route("/logout")
+@login_required
 def logout():
     """Logs out an existing user"""
     if current_user.is_authenticated:
         logout_user()
     return redirect("/")
 
-@login_required
 @app.route("/secrets")
+@login_required
 def secrets():
     """A secret page containing some additional financial information only logged-in users can see"""
     with open("due_diligence.txt", "r") as file:
         lines = file.readlines()
-    return render_template("secrets.html", lines=lines, enumerate=enumerate)
+    return render_template("secrets.html", lines=lines, enumerate=enumerate, is_logged_in=current_user.is_authenticated)
 
 @app.errorhandler(404)
 def page_not_found(e):
