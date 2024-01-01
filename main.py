@@ -143,6 +143,11 @@ def page_not_found(e):
     """Customized 404 error page"""
     return render_template("404.html")
 
+@app.errorhandler(401)
+def unauthorized(e):
+    """Customized 401 error page"""
+    return render_template("401.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5002)
