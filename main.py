@@ -4,7 +4,7 @@ import datetime
 from ratios import ratios_dict
 from forms import FinancialRatiosForm, SignupForm, LoginForm
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_user, current_user, UserMixin, logout_user
+from flask_login import LoginManager, login_user, current_user, UserMixin, logout_user, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
 
@@ -128,6 +128,14 @@ def logout():
     if current_user.is_authenticated:
         logout_user()
     return redirect("/")
+
+@login_required
+@app.route("/secrets")
+def secrets():
+    """A secret page containing some additional financial information only logged-in users can see"""
+    with open("due_diligence.txt", "r") as file:
+        lines = file.readlines()
+    return render_template("secrets.html", lines=lines, enumerate=enumerate)
 
 @app.errorhandler(404)
 def page_not_found(e):
