@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, flash, url_for
+from flask import Flask, render_template, redirect, flash, url_for, session
 from flask_bootstrap import Bootstrap5
 import datetime
 from ratios import ratios_dict
@@ -63,14 +63,18 @@ year = datetime.datetime.now().year
 
 @app.route("/")
 def home():
-    return render_template("index.html", year=year, is_logged_in=current_user.is_authenticated)
+    # Getting the saved calculations of the current user
+    saved_cals = None
+    if current_user.is_authenticated:
+        saved_cals = db.session.execute(db.select(Calculations).where(Calculations.user_id == current_user.id)).scalars().all()
+    return render_template("index.html", year=year, is_logged_in=current_user.is_authenticated, saved_cals=saved_cals)
 
 @app.route("/ratio/<string:ratio>", methods=["GET", "POST"])
 def ratio(ratio):
-    is_post = False
     result = None
+    is_post = False
     form = FinancialRatiosForm()
-    form_2 = None
+    form_2 = SaveToHistory()
     # In order to check if the ratio in url actually exists:
     if ratio in ratios_dict:
         name = ratios_dict[ratio]["name"]
@@ -79,22 +83,34 @@ def ratio(ratio):
         labels = ratios_dict[ratio]["labels"]
         # Upon form submit the following lines of code will get triggered
         if form.validate_on_submit():
-            input_1 = form.input_1.data
-            input_2 = form.input_2.data
+            print("f1")
+            session['input_1'] = form.input_1.data
+            session['input_2'] = form.input_2.data
             # Calling the function stored inside dict
-            result = ratios_dict[ratio]["function"](input_1, input_2)
+            result = ratios_dict[ratio]["function"](session['input_1'], session['input_2'])
+            session['result'] = result
             is_post = True
-            # The form for saving the calculation to history
-            form_2 = SaveToHistory()
-            if form_2.validate_on_submit():
-                date = datetime.datetime.now().strftime("%d, %b %Y")
-                notes = form_2.note.data
-                # Creating new record in DB
-                new_calculation = Calculations(user=current_user, calculation_name=name, result=result, input_1_name=labels[0], input_1_val=input_1, input_2_name=labels[1], input_2_val=input_2, notes=notes, date=date)
-                db.session.add(new_calculation)
-                db.session.commit()
+        if form_2.validate_on_submit() and form_2.submit.data:
+            print("f2")
+            date = datetime.datetime.now().strftime("%d, %b %Y")
+            notes = form_2.note.data
+            # Creating new record in DB
+            new_calculation = Calculations(
+                user=current_user,
+                calculation_name=name,
+                result=session['result'],
+                input_1_name=labels[0],
+                input_1_val=session['input_1'],
+                input_2_name=labels[1],
+                input_2_val=session['input_2'],
+                notes=notes,
+                date=date
+            )
+            db.session.add(new_calculation)
+            db.session.commit()
 
-    return render_template("ratio.html", ratio=ratio, ratio_name=name, ratio_description=description, form=form, form_2=form_2, labels=labels, year=year, is_post=is_post, result=result, is_logged_in=current_user.is_authenticated)
+    return render_template("ratio.html", ratio=ratio, ratio_name=name, ratio_description=description, form=form, form_2=form_2,
+                           labels=labels, year=year, is_post=is_post, result=result, is_logged_in=current_user.is_authenticated)
 
 @app.route("/all-ratios")
 def all_ratios():
