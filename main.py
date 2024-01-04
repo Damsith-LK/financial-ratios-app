@@ -24,6 +24,14 @@ db.init_app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+def check_notes(notes: str) -> None or str:
+    """For checking if notes have a value like 'nothing' or 'None'. If so, returns None.
+    Use this in ratio()"""
+    ignore_list = ["none", "nothing", "no", ".", "n", "ignore", "false", "null", "no notes"]
+    if notes.lower() in ignore_list:
+        return None
+    return notes
+
 @login_manager.user_loader
 def load_user(user_id):
     return db.get_or_404(Users, user_id)
@@ -103,7 +111,7 @@ def ratio(ratio):
                 input_1_val=session['input_1'],
                 input_2_name=labels[1],
                 input_2_val=session['input_2'],
-                notes=notes,
+                notes=check_notes(notes),
                 date=date
             )
             db.session.add(new_calculation)
