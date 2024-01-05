@@ -27,7 +27,7 @@ login_manager.init_app(app)
 def check_notes(notes: str) -> None or str:
     """For checking if notes have a value like 'nothing' or 'None'. If so, returns None.
     Use this in ratio()"""
-    ignore_list = ["none", "nothing", "no", ".", "n", "ignore", "false", "null", "no notes"]
+    ignore_list = ["none", "nothing", "no", ".", "n", "ignore", "false", "null", "no notes", "something", "type"]
     if notes.lower() in ignore_list:
         return None
     return notes
@@ -71,11 +71,16 @@ year = datetime.datetime.now().year
 
 @app.route("/")
 def home():
+    display_cals = None
     # Getting the saved calculations of the current user
-    saved_cals = None
     if current_user.is_authenticated:
-        saved_cals = db.session.execute(db.select(Calculations).where(Calculations.user_id == current_user.id)).scalars().all()
-    return render_template("index.html", year=year, is_logged_in=current_user.is_authenticated, saved_cals=saved_cals)
+        all_cals = db.session.execute(db.select(Calculations).where(Calculations.user_id == current_user.id)).scalars().all()
+        # Get only the 5 most recent calculations if there are 5 or more calculations
+        if len(all_cals) >= 5:
+            display_cals = all_cals[-5:]
+        else:
+            display_cals = all_cals
+    return render_template("index.html", year=year, is_logged_in=current_user.is_authenticated, display_cals=display_cals)
 
 @app.route("/ratio/<string:ratio>", methods=["GET", "POST"])
 def ratio(ratio):
