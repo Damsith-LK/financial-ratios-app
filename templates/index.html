@@ -21,9 +21,12 @@
 <!--Here a features set and testimonial will appear if (not logged in) or if (user haven't saved any calculations) . Else it will show your past calculations history-->
 <section class="content">
 {% if is_logged_in and display_cals != [] %}
+  <div class="container my-5">
+    <h1 class="text-body-emphasis display-6 border-bottom border-2">Saved Calculations</h1>
+  </div>
   <!--Saved calculations-->
   <div class="list-group container my-5">
-  {% for cal in display_cals %}
+  {% for cal in display_cals[::-1] %}
     <div class="list-group-item list-group-item-action container" aria-current="true">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">{{ cal.calculation_name }}</h5>
