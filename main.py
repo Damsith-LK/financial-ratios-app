@@ -179,6 +179,13 @@ def login():
 
     return render_template("login.html", form=form, year=year, is_logged_in=current_user.is_authenticated)
 
+@app.route("/saved-calculations")
+def saved_calculations():
+    """Page for displaying all the calculations saved by the user"""
+    if not current_user.is_authenticated:
+        flash("You need to have an account in order to save calculations and view them, dummy.")
+        return redirect(url_for("signup"))
+    return render_template("saved_calculations", year=year, is_logged_in=current_user.is_authenticated)
 
 @app.route("/logout")
 def logout():
