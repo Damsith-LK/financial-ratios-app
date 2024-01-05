@@ -28,7 +28,7 @@ def check_notes(notes: str) -> None or str:
     """For checking if notes have a value like 'nothing' or 'None'. If so, returns None.
     Use this in ratio()"""
     ignore_list = ["none", "nothing", "no", ".", "n", "ignore", "false", "null", "no notes", "something", "type"]
-    if notes.lower() in ignore_list:
+    if notes.strip().lower() in ignore_list:
         return None
     return notes
 
@@ -179,13 +179,15 @@ def login():
 
     return render_template("login.html", form=form, year=year, is_logged_in=current_user.is_authenticated)
 
+
 @app.route("/saved-calculations")
 def saved_calculations():
     """Page for displaying all the calculations saved by the user"""
     if not current_user.is_authenticated:
-        flash("You need to have an account in order to save calculations and view them, dummy.")
+        flash("You need an account in order to save calculations and view them, dummy.")
         return redirect(url_for("signup"))
-    return render_template("saved_calculations", year=year, is_logged_in=current_user.is_authenticated)
+    saved_cals = db.session.execute(db.select(Calculations).where(Calculations.user_id == current_user.id)).scalars().all()
+    return render_template("saved_calculations.html", year=year, is_logged_in=current_user.is_authenticated, saved_cals=saved_cals)
 
 @app.route("/logout")
 def logout():
@@ -193,6 +195,7 @@ def logout():
     if current_user.is_authenticated:
         logout_user()
     return redirect("/")
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5002)

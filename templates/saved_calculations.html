@@ -1,3 +1,23 @@
 {% include 'header.html' %}
 
+{% if saved_cals == [] %}
+<div class="modal modal-sheet d-block  p-4 py-md-5 mt-5" tabindex="-1" role="dialog" id="modalSignin">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content rounded-4 shadow">
+			<div class="modal-header p-4 pb-4 border-bottom-0 ms-5">
+				<h1 class="fw-bold mb-0 fs-2 ms-5">No Calculations</h1>
+			</div>
+
+			<div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
+				<p class="lead mb-4 text-center">Seems like you haven't saved any calculations yet.</p>
+        <a type="button" class="btn btn-lg btn-primary" href="{{url_for('all_ratios')}}">View All Ratios Available on Our Site</a>
+        <a type="button" class="btn btn-lg btn-secondary" href="/">Go Home</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% else %}
+
+{% endif %}
+
 {% include 'footer.html' %}
