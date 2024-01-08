@@ -2,7 +2,7 @@
 
 from flask_wtf import FlaskForm
 from wtforms import FloatField, StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Email
+from wtforms.validators import DataRequired, Email, Optional
 
 class FinancialRatiosForm(FlaskForm):
     input_1 = FloatField(validators=[DataRequired()])
@@ -19,3 +19,7 @@ class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Let me in!")
+
+class SaveToHistory(FlaskForm):
+    note = StringField("Notes", validators=[DataRequired()])
+    submit = SubmitField("Save to history")

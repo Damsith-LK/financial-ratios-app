@@ -46,11 +46,14 @@
           </li>
           {% endif %}
           <li class="nav-item">
-            <a class="nav-link px-lg-3 py-3 py-lg-4 text-light" href="#">About</a>
+            <a class="nav-link px-lg-3 py-3 py-lg-4 text-light" href="{{url_for('all_ratios')}}">Ratios</a>
           </li>
+          <!--Only logged in users can see secrets-->
+          {% if logged_in %}
           <li class="nav-item">
-            <a class="nav-link px-lg-3 py-3 py-lg-4 me-4 text-light" href="#">Contact</a>
+            <a class="nav-link px-lg-3 py-3 py-lg-4 me-4 text-light" href="url_for('secrets')">Secrets</a>
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link px-lg-2  py-3 py-lg-4" href="https://github.com/Damsith-LK/financial-ratios-app"><img
                 src="../static/assets/icons/github.svg" height="15" alt="github"></a>
