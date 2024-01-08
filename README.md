@@ -110,7 +110,7 @@ This project was made entirely by me after completing a basic Flask course. Ulti
 ## Roadmap
 
 - [x] Design the GUI
-- [ ] Make the home page work
+- [x] Make the home page work
 - [x] Define financial ratios available
 - [x] Let the user calculate financial ratios on respective pages
 - [x] Complete the sign-in process
