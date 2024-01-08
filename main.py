@@ -187,7 +187,8 @@ def saved_calculations():
         flash("You need an account in order to save calculations and view them, dummy.")
         return redirect(url_for("signup"))
     saved_cals = db.session.execute(db.select(Calculations).where(Calculations.user_id == current_user.id)).scalars().all()
-    return render_template("saved_calculations.html", year=year, is_logged_in=current_user.is_authenticated, saved_cals=saved_cals)
+    return render_template("saved_calculations.html", year=year, is_logged_in=current_user.is_authenticated, saved_cals=saved_cals,
+                           username=current_user.name, all_cals=saved_cals)
 
 @app.route("/logout")
 def logout():
