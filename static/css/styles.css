@@ -41,3 +41,7 @@ html {
   justify-content: center;
   align-items: center;
 }
+
+.bg-darkpurple{
+  background-color:#6527BE;
+}
