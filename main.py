@@ -4,7 +4,7 @@ import datetime
 from ratios import ratios_dict
 from forms import FinancialRatiosForm, SignupForm, LoginForm, SaveToHistory
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_user, current_user, UserMixin, logout_user
+from flask_login import LoginManager, login_user, current_user, UserMixin, logout_user, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.orm import relationship
 import os
@@ -191,11 +191,30 @@ def saved_calculations():
                            username=current_user.name, all_cals=saved_cals)
 
 @app.route("/logout")
+@login_required
 def logout():
     """Logs out an existing user"""
     if current_user.is_authenticated:
         logout_user()
     return redirect("/")
+
+@app.route("/secrets")
+@login_required
+def secrets():
+    """A secret page containing some additional financial information only logged-in users can see"""
+    with open("due_diligence.txt", "r") as file:
+        lines = file.readlines()
+    return render_template("secrets.html", lines=lines, enumerate=enumerate, is_logged_in=current_user.is_authenticated)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    """Customized 404 error page"""
+    return render_template("404.html")
+
+@app.errorhandler(401)
+def unauthorized(e):
+    """Customized 401 error page"""
+    return render_template("401.html")
 
 
 if __name__ == "__main__":
