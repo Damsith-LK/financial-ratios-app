@@ -127,7 +127,7 @@ def ratio(ratio):
 
 @app.route("/all-ratios")
 def all_ratios():
-    return render_template("all_ratios.html", ratios_dict=ratios_dict, is_logged_in=current_user.is_authenticated)
+    return render_template("all_ratios.html", ratios_dict=ratios_dict, is_logged_in=current_user.is_authenticated, year=year)
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
