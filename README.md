@@ -60,7 +60,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project was made entirely by me after completing a basic Flask course. Ultimately, the purpose is to improve my skills. The website calculates financial ratios after taking inputs from the user
+This project was made entirely by me after completing a basic Flask course. Ultimately, the purpose is to improve my skills. The website calculates financial ratios after taking inputs from the user.
+
+### Inspiration
+
+**Rich Dad's Guide to Investing** book inspired me to make something related to investments. As a beginner, I chose to create this project. The descriptions for financial ratios in this project are somewhat influenced by the book. The due diligence checklist is from the book as well.
 
 ### Features
 1. Calculate financial ratios quickly and efficiently.
@@ -147,3 +151,19 @@ Don't forget to give the project a star! Thanks again!
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- Pictures -->
+## Pictures
+
+- Home Page (logged-out)
+
+  ![image](https://github.com/Damsith-LK/financial-ratios-app/assets/113516635/1bf85705-4027-4d49-a00f-aa9f57e529e0)
+
+- Sign Up and Login forms
+    
+  <img src="https://github.com/Damsith-LK/financial-ratios-app/assets/113516635/19fb83a5-f6f8-4ae7-b069-b79a59c95076" alt="Image 1">
+  <img src="https://github.com/Damsith-LK/financial-ratios-app/assets/113516635/0e8bb4f9-731f-40eb-bda0-6540ff627d86" alt="Image 2">
+
+- /all-ratios page
+
+  ![image](https://github.com/Damsith-LK/financial-ratios-app/assets/113516635/38f9c75c-7a5c-42e2-82df-0be042fc499b)
