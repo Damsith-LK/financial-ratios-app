@@ -71,7 +71,20 @@ This project was made entirely by me after completing a basic Flask course. Ulti
 2. Users can register or log in to their accounts.
 3. Users can log out of their accounts.
 4. Logged-in users can save their calculations to the history if they like
+5. Logged-in users can see their past saved calculations if there are any
 
+### Financial Ratios available in the website
+1. Gross margin percentage
+2. Net operating percentage
+3. Operating leverage
+4. Financial leverage
+5. Total leverage
+6. Debt-to-equity ratio
+7. Quick ratio
+8. Current ratio
+9. P/E ratio
+10. Return on equity
+11. Cash-on-cash return
 
 ### Built With
 
@@ -94,15 +107,15 @@ This project was made entirely by me after completing a basic Flask course. Ulti
 <!-- INSTALLATION -->
 ## Getting Started
 
-1. Clone the repo
+1. Fork the Project
    ```sh
    git clone https://github.com/Damsith-LK/financial-ratios-app
    ```
 2. Install with pip
+   ```sh
+   pip install -r requirements.txt
    ```
-   $ pip install -r requirements.txt
-   ```
-3. Replace environment-variable-fetching-lines with actual information
+3. Create your own environment variables with valid values
 4. Run the code now
    ```sh
    python main.py
@@ -136,9 +149,9 @@ If you have a suggestion that would make this better, please fork the repo and c
 Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
-2. Create your Features Branch (`git checkout -b features`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin features`)
+2. Create your Features Branch (`git checkout -b your-feature-branch-name`)
+3. Commit your Changes (`git commit -m "Added a cool new feature: [brief description]"`)
+4. Push to the Branch (`git push origin your-feature-branch-name`)
 5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
